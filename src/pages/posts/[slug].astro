@@ -1,0 +1,43 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog', ({ data }) => !data.draft);
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+	}));
+}
+
+const slug = Astro.params.slug;
+const post = await getEntry('blog', slug);
+if (!post) {
+	throw new Error(`Post not found: ${slug}`);
+}
+
+const { Content } = await post.render();
+---
+
+<BaseLayout title={post.data.title}>
+	<article>
+		<header>
+			<h1>{post.data.title}</h1>
+			<p>
+				<time datetime={post.data.pubDate.toISOString()}>
+					{post.data.pubDate.toLocaleDateString('zh-CN')}
+				</time>
+				{post.data.updatedDate ? (
+					<>
+						{' · 更新于 '}
+						<time datetime={post.data.updatedDate.toISOString()}>
+							{post.data.updatedDate.toLocaleDateString('zh-CN')}
+						</time>
+					</>
+				) : null}
+			</p>
+			{post.data.description ? <p>{post.data.description}</p> : null}
+		</header>
+		<Content />
+	</article>
+</BaseLayout>

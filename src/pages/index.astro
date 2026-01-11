@@ -1,0 +1,15 @@
+---
+import { getCollection } from "astro:content";
+import PostList from "../components/PostList.svelte";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<BaseLayout title="首页">
+	<h1>派蒙的小窝</h1>
+	<p>最近文章</p>
+	<PostList posts={posts} />
+</BaseLayout>
