@@ -1,80 +1,63 @@
-/* Minimal global styling for the blog (no framework) */
-
 :root {
-	color-scheme: light dark;
-	--content-width: 72ch;
-	--page-padding: 1rem;
-	--line-height: 1.6;
-}
-
-*,
-*::before,
-*::after {
-	box-sizing: border-box;
+  color-scheme: light dark;
+  --site-container-wide: calc(72ch + 2rem);
+  --site-container-prose: calc(65ch + 2rem);
+  --site-header-shrink-range: 24px;
 }
 
 html,
 body {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  line-height: 1.6;
 }
 
-body {
-	font: 16px/var(--line-height) system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
-		Arial, "Apple Color Emoji", "Segoe UI Emoji";
-	min-height: 100svh;
-	display: flex;
-	flex-direction: column;
+pre {
+  overflow-x: auto;
 }
 
-main {
-	max-width: var(--content-width);
-	margin: 0 auto;
-	padding: 1.25rem var(--page-padding);
-	flex: 1;
-	width: 100%;
+table {
+  display: block;
+  overflow-x: auto;
 }
 
-header,
-footer {
-	max-width: var(--content-width);
-	margin: 0 auto;
-	padding: 1rem var(--page-padding);
+@keyframes site-header-shrink {
+  from {
+    max-width: var(--site-container-wide);
+  }
+
+  to {
+    max-width: var(--site-container-prose);
+  }
 }
 
-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1rem;
-	border-bottom: 1px solid currentColor;
+@media (prefers-reduced-motion: reduce) {
+  .site-header-inner {
+    animation: none;
+  }
 }
 
-nav {
-	display: flex;
-	gap: 0.75rem;
-	flex-wrap: wrap;
+/* 文章页布局：TOC 绝对定位浮出正文右侧，不影响正文宽度 */
+.post-wrap {
+  position: relative;
 }
 
-a {
-	color: inherit;
+.post-toc {
+  display: none;
 }
 
-a[aria-current='page'] {
-	font-weight: 600;
-	text-decoration: underline;
-}
-
-ul {
-	padding-left: 1.25rem;
-}
-
-article header {
-	border-bottom: 0;
-	padding: 0;
-	margin-bottom: 1rem;
-}
-
-footer {
-	border-top: 1px solid currentColor;
+@media (min-width: 1280px) {
+  .post-toc {
+    display: block;
+    position: fixed;
+    top: 5rem;
+    left: calc(50% + var(--site-container-prose) / 2 + 2rem);
+    width: 13rem;
+    max-height: calc(100svh - 6rem);
+    overflow-y: auto;
+  }
 }

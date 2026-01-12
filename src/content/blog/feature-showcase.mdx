@@ -1,0 +1,145 @@
+---
+title: "博客特性一览"
+description: "展示本博客目前支持的所有特性：排版、代码高亮、标签、目录、上下篇导航等。"
+pubDate: 2026-03-11
+updatedDate: 2026-03-11
+tags: ["Astro", "MDX", "排版"]
+---
+
+这篇文章是一份功能展示，涵盖目前博客支持的所有特性。页面右侧（宽屏下）可以看到自动生成的**目录**，文章底部有**上下篇导航**，标题下方有**标签**。
+
+---
+
+## 文字排版
+
+普通段落文字。支持 **加粗**、*斜体*、~~删除线~~、`行内代码`，以及 [超链接](#)。
+
+> 这是一段引用文字。可以用来标注重要内容、引用他人观点，或者做备注。
+>
+> 引用也可以是多段落的。
+
+---
+
+## 标题层级
+
+### 三级标题（H3）
+
+H3 会同样出现在右侧目录中，比 H2 缩进一级。
+
+#### 四级标题（H4）
+
+H4 不进目录，仅作文章内部的细分层级使用。
+
+---
+
+## 列表
+
+无序列表：
+
+- Astro 静态站点生成
+- MDX 支持（可在 Markdown 中使用组件）
+- UnoCSS 原子化样式
+- RSS 订阅 `/rss.xml`
+- 自动生成 Sitemap
+
+有序列表：
+
+1. 编写 `.mdx` 文章
+2. 在 frontmatter 中填写 `title`、`pubDate`、`tags` 等元数据
+3. 运行 `pnpm build`，Astro 自动生成静态页面
+
+嵌套列表：
+
+- 内容
+  - 标签系统：点击标签可筛选同标签文章
+  - 目录（TOC）：自动提取 H2、H3 标题
+- 导航
+  - 上一篇 / 下一篇文章跳转
+  - 导航栏高亮当前页面
+
+---
+
+## 代码块
+
+行内代码：`const site = "https://paimoe.icu"`
+
+JavaScript 代码块：
+
+```js
+// 获取所有非草稿文章，按时间降序排列
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+```
+
+TypeScript：
+
+```ts
+interface Post {
+  slug: string;
+  data: {
+    title: string;
+    pubDate: Date;
+    tags?: string[];
+  };
+}
+```
+
+Shell：
+
+```sh
+pnpm dev      # 启动开发服务器
+pnpm build    # 构建生产版本
+pnpm preview  # 预览构建结果
+```
+
+---
+
+## 表格
+
+| 特性 | 实现方式 | 状态 |
+|------|----------|------|
+| 文章列表 | `getCollection` | ✅ |
+| 标签系统 | frontmatter `tags` + 动态路由 | ✅ |
+| 文章目录 | `render()` 返回的 `headings` | ✅ |
+| 上下篇导航 | `getStaticPaths` 传 `props` | ✅ |
+| RSS 订阅 | `@astrojs/rss` | ✅ |
+| Sitemap | `@astrojs/sitemap` | ✅ |
+| 草稿模式 | frontmatter `draft: true` | ✅ |
+| 暗色模式 | 跟随系统（`prefers-color-scheme`） | ✅ |
+
+---
+
+## 图片
+
+{/* ![占位图](https://placehold.co/720x360?text=Image+Placeholder) */}
+
+*图注：Markdown 原生图片语法，自动适配 prose 样式。*
+
+---
+
+## Frontmatter 字段说明
+
+本博客文章支持以下 frontmatter 字段：
+
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `title` | `string` | ✅ | 文章标题 |
+| `description` | `string` | — | 摘要，用于列表预览和 SEO |
+| `pubDate` | `Date` | ✅ | 发布日期 |
+| `updatedDate` | `Date` | — | 最后更新日期，显示在标题下方 |
+| `tags` | `string[]` | — | 标签数组，可多个 |
+| `draft` | `boolean` | — | `true` 时不出现在列表和构建产物中 |
+
+---
+
+## 草稿模式
+
+将 `draft: true` 加入 frontmatter，文章将从列表、RSS 和 Sitemap 中隐藏，构建时也不会生成对应页面，适合未完成的文章。
+
+```yaml
+---
+title: "未完成的文章"
+pubDate: 2026-03-11
+draft: true
+---
+```

@@ -1,9 +1,11 @@
 ---
-import SiteFooter from '../components/SiteFooter.svelte';
-import SiteHeader from '../components/SiteHeader.svelte';
+import SiteFooter from '../components/SiteFooter.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import '../styles/global.css';
 
-const { title } = Astro.props as { title: string };
+const { title, description } = Astro.props as { title: string; description?: string };
 const currentPath = Astro.url.pathname;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
@@ -15,14 +17,20 @@ const currentPath = Astro.url.pathname;
 			type="image/svg+xml"
 			href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Ctext%20y%3D'0.9em'%20font-size%3D'90'%3E%E2%9C%A8%3C%2Ftext%3E%3C%2Fsvg%3E"
 		/>
-		<link rel="stylesheet" href="/src/styles/global.css" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<link rel="canonical" href={canonicalURL} />
+		{description && <meta name="description" content={description} />}
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		{description && <meta property="og:description" content={description} />}
+		<meta property="og:url" content={canonicalURL} />
+		<link rel="alternate" type="application/rss+xml" title="派蒙的小窝" href="/rss.xml" />
 	</head>
-	<body>
+	<body class="min-h-[100svh] flex flex-col text-base leading-relaxed">
 		<SiteHeader currentPath={currentPath} />
-		<main>
+		<main class="mx-auto w-full max-w-[var(--site-container-prose)] box-border flex-1 px-4 py-6 space-y-4">
 			<slot />
 		</main>
 		<SiteFooter />

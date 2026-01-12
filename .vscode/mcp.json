@@ -1,17 +1,17 @@
 {
-	"servers": {
-		"Astro docs": {
-			"url": "https://mcp.docs.astro.build/mcp",
-			"type": "http"
-		},
-		"svelte-mcp": {
-			"type": "stdio",
-			"command": "npx",
-			"args": [
-				"@sveltejs/mcp@0.1.17"
-			],
-			"env": {}
-		}
-	},
-	"inputs": []
+  "servers": {
+    "Astro docs": {
+      "url": "https://mcp.docs.astro.build/mcp",
+      "type": "http"
+    },
+    "svelte-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@sveltejs/mcp@0.1.17"
+      ],
+      "env": {}
+    }
+  },
+  "inputs": []
 }

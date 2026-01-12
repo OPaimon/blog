@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import PostList from "../components/PostList.svelte";
+import PostList from "../components/PostList.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
@@ -8,8 +8,8 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 );
 ---
 
-<BaseLayout title="首页">
-	<h1>派蒙的小窝</h1>
-	<p>最近文章</p>
+<BaseLayout title="派蒙的小窝" description="记录前端开发、编程学习与日常思考的个人博客。">
+	<h1 class="m-0 text-2xl font-semibold">派蒙的小窝</h1>
+	<p class="m-0 opacity-80">最近文章</p>
 	<PostList posts={posts} />
 </BaseLayout>
