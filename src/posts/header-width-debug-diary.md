@@ -1,9 +1,11 @@
 ---
 title: "一次 Header 宽度幽灵问题的完整排查"
+author: OPaimon
 description: "记录今天如何定位并修复 Header 右侧漏底、TOC 错位与容器宽度联动回归问题。"
-pubDate: 2026-03-12
+date: 2026-03-12
 updatedDate: 2026-03-12
 tags: ["Astro", "UnoCSS", "CSS", "调试"]
+draft: false
 ---
 
 今天花了很长时间处理一个看起来“很玄学”的 UI 问题：
@@ -65,7 +67,8 @@ site-header-inner: w-full + px-4
 - `px-4` 会额外再加宽度
 - 内层可能比外层更宽，导致视觉上出现“漏底/不对齐”
 
-同样的问题也会出现在 `main`、`footer`：只要是 `w-full + padding`，就需要统一盒模型策略。
+同样的问题也会出现在 `main`、`footer`：只要是
+`w-full + padding`，就需要统一盒模型策略。
 
 ---
 
@@ -83,7 +86,8 @@ site-header-inner: w-full + px-4
 
 ### 2) 容器变量与实际宽度保持同一语义
 
-为了保持“视觉内容宽度”不变，同时使用 `box-border`，把容器变量改成包含两侧 padding：
+为了保持“视觉内容宽度”不变，同时使用 `box-border`，把容器变量改成包含两侧
+padding：
 
 ```css
 :root {

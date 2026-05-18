@@ -1,0 +1,40 @@
+---
+layout: layouts/base.vto
+title: "文章"
+description: "所有博客文章列表。"
+type: ""
+---
+
+<h1 class="m-0 text-2xl font-semibold">文章</h1>
+
+{{ set posts = search.pages("type=post draft!=true", "date=desc") }}
+
+{{ if posts.length }}
+  <ul class="m-0 p-0 list-none space-y-3">
+    {{ for post of posts }}
+      <li class="leading-relaxed">
+        <div>
+          <a
+            class="font-semibold no-underline hover:underline"
+            href="{{ post.url }}"
+          >
+            {{ post.title }}
+          </a>
+          <span class="opacity-70"> — </span>
+          <time
+            class="text-sm opacity-70"
+            datetime="{{ post.date |> date('yyyy-MM-dd') }}"
+          >
+            {{ post.date |> date("yyyy-MM-dd") }}
+          </time>
+        </div>
+        {{ if post.description }}
+          <div class="text-sm opacity-80">{{ post.description }}</div>
+        {{ /if }}
+      </li>
+    {{ /for }}
+  </ul>
+{{ else }}
+  <p class="m-0 opacity-80">暂时还没有文章。</p>
+{{ /if }}
+

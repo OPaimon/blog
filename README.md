@@ -1,6 +1,7 @@
 # 个人博客（Astro + MDX）
 
-一个以内容为中心的静态博客项目，使用 Astro 构建，文章来源于 `src/content/blog` 下的 MDX 文件。
+一个以内容为中心的静态博客项目，使用 Astro 构建，文章来源于 `src/content/blog`
+下的 MDX 文件。
 
 ## 技术栈
 
@@ -79,4 +80,5 @@ pnpm build
 
 ### 发布方式
 
-项目是静态站点，可部署到任意静态托管平台（如 Vercel、Netlify、Cloudflare Pages、GitHub Pages）。
+项目是静态站点，可部署到任意静态托管平台（如 Vercel、Netlify、Cloudflare
+Pages、GitHub Pages）。

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="{{ it.metas?.lang || 'zh-CN' }}">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20100%20100'%3E%3Ctext%20y%3D'0.9em'%20font-size%3D'90'%3E%E2%9C%A8%3C%2Ftext%3E%3C%2Fsvg%3E"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ it.title || it.metas?.title }}</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="canonical" href="{{ url |> url(true) }}" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="{{ it.metas?.site }}"
+      href="/rss.xml"
+    />
+  </head>
+  <body class="min-h-[100svh] flex flex-col text-base leading-relaxed">
+    <header class="site-header">
+      <div class="site-header-inner">
+        <div class="shrink-0">
+          <a class="font-semibold no-underline hover:underline" href="/"
+          >个人博客</a>
+        </div>
+        <nav class="flex flex-wrap gap-3 items-center" aria-label="站点导航">
+          {{ for link of nav_links }}
+            <a
+              class="no-underline hover:underline"
+              href="{{ link.href }}"
+              {{ if link.href == "/" ? url == "/" : url.startsWith(link.href) }}
+                aria-current="page"
+              {{ /if }}
+            >
+              {{ link.label }}
+            </a>
+          {{ /for }}
+
+          <!-- RSS 订阅按钮 -->
+          <a
+            href="/rss.xml"
+            class="no-underline hover:underline opacity-60 hover:opacity-100"
+            aria-label="RSS 订阅"
+            title="RSS 订阅"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+              class="block"
+            >
+              <path
+                d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"
+              />
+            </svg>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <main
+      class="mx-auto w-full max-w-[var(--site-container-prose)] box-border flex-1 px-4 py-6 space-y-4"
+    >
+      {{ content }}
+    </main>
+    <footer
+      class="mx-auto w-full max-w-[var(--site-container-wide)] box-border px-4 py-4 border-t border-current"
+    >
+      <small class="opacity-80">© {{ date |> date("yyyy") }} {{
+          metas.site
+        }}</small>
+    </footer>
+  </body>
+</html>

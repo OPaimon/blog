@@ -1,13 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-    <title>✨</title>
-    <text
-        x="50%"
-        y="52%"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        font-size="96"
-        font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, system-ui, sans-serif"
-    >
-        ✨
-    </text>
+  <title>✨</title>
+  <text
+    x="50%"
+    y="52%"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-size="96"
+    font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, system-ui, sans-serif"
+  >✨</text>
 </svg>
