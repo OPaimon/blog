@@ -2,7 +2,7 @@
 layout: layouts/base.vto
 ---
 <div class="post-wrap">
-  {{ if toc.length }}
+  {{ if toc }}
     <aside class="post-toc not-prose">
       <nav aria-label="文章目录" class="toc">
         <p
@@ -68,7 +68,7 @@ layout: layouts/base.vto
           {{ for tag of tags }}
             <li>
               <a
-                href="/tags/{{ tag }}/"
+                href="/tags/{{ tag |> slugify }}/"
                 class="text-xs px-2 py-0.5 rounded-full border border-current opacity-60 hover:opacity-100 no-underline"
               >
                 {{ tag }}

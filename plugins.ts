@@ -18,7 +18,14 @@ export default function () {
   return (site: Lume.Site) => {
     site.use(mdx())
       .use(unocss({ options: unocssConfig }))
-      .use(slugifyUrls())
+      .use(slugifyUrls({
+        alphanumeric: false, // keep non-ASCII characters
+        lowercase: true,
+        separator: "-",
+        replace: {
+          "&": "-and-",
+        },
+      }))
       .use(metas())
       .use(date())
       .use(toc({
