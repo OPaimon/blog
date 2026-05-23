@@ -3,7 +3,6 @@
     "lume/": "https://cdn.jsdelivr.net/gh/lumeland/lume@3.2.4/",
     "lume/jsx-runtime": "https://cdn.jsdelivr.net/gh/oscarotero/ssx@0.1.15/jsx-runtime.ts",
     "lume/cms/": "https://cdn.jsdelivr.net/gh/lumeland/cms@0.15.3/",
-    "markdown-plugins/": "https://cdn.jsdelivr.net/gh/lumeland/markdown-plugins@0.12.0/",
     "unocss": "npm:unocss@^66.6.8",
     "@unocss/": "npm:@unocss/"
   },

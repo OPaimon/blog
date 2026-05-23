@@ -2,44 +2,7 @@
 layout: layouts/base.vto
 ---
 <div class="post-wrap">
-  {{ if toc }}
-    <aside class="post-toc not-prose">
-      <nav aria-label="文章目录" class="toc">
-        <p
-          class="m-0 mb-2 text-xs font-semibold uppercase tracking-wider opacity-50"
-        >
-          目录
-        </p>
-        <ul class="m-0 p-0 list-none space-y-1 text-sm">
-          {{ for item of toc }}
-            <li>
-              <a
-                href="#{{ item.slug }}"
-                class="block opacity-60 hover:opacity-100 no-underline hover:underline leading-snug py-0.5"
-              >
-                {{ item.text }}
-              </a>
-
-              {{ if item.children.length }}
-                <ul class="m-0 p-0 list-none pl-3 space-y-1">
-                  {{ for child of item.children }}
-                    <li>
-                      <a
-                        href="#{{ child.slug }}"
-                        class="block opacity-60 hover:opacity-100 no-underline hover:underline leading-snug py-0.5"
-                      >
-                        {{ child.text }}
-                      </a>
-                    </li>
-                  {{ /for }}
-                </ul>
-              {{ /if }}
-            </li>
-          {{ /for }}
-        </ul>
-      </nav>
-    </aside>
-  {{ /if }}
+  <aside class="post-toc not-prose"></aside>
   <article class="prose prose-lg prose-gray dark:prose-invert">
     <header class="space-y-2">
       <h1 class="m-0 text-2xl font-semibold">{{ title }}</h1>

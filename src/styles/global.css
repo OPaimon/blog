@@ -17,6 +17,108 @@ pre {
   overflow-x: auto;
 }
 
+/* Prism syntax highlighting — light/dark aware to match `dark: "media"`. */
+:root {
+  --code-bg: #f6f8fa;
+  --code-fg: #24292e;
+  --code-comment: #6a737d;
+  --code-keyword: #d73a49;
+  --code-string: #032f62;
+  --code-number: #005cc5;
+  --code-function: #6f42c1;
+  --code-punctuation: #5e6b77;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --code-bg: #1e1e2e;
+    --code-fg: #d6deeb;
+    --code-comment: #7f848e;
+    --code-keyword: #c792ea;
+    --code-string: #ecc48d;
+    --code-number: #f78c6c;
+    --code-function: #82aaff;
+    --code-punctuation: #9aa5b1;
+  }
+}
+
+pre[class*="language-"],
+code[class*="language-"] {
+  color: var(--code-fg);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  line-height: 1.6;
+  tab-size: 2;
+  hyphens: none;
+}
+
+pre[class*="language-"] {
+  background: var(--code-bg);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+:not(pre) > code[class*="language-"] {
+  background: var(--code-bg);
+  padding: 0.15em 0.35em;
+  border-radius: 0.25rem;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: var(--code-punctuation);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--code-number);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--code-string);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.token.atrule,
+.token.attr-value {
+  color: var(--code-keyword);
+}
+
+.token.keyword,
+.token.important {
+  color: var(--code-keyword);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--code-function);
+}
+
+.token.regex,
+.token.variable {
+  color: var(--code-fg);
+}
+
 table {
   display: block;
   overflow-x: auto;
@@ -57,4 +159,20 @@ table {
     max-height: calc(100svh - 6rem);
     overflow-y: auto;
   }
+}
+
+/* Pagefind search page — theme-aware via system colors so it follows
+   the site's `prefers-color-scheme` dark mode. Sizing keeps Pagefind's
+   default full-page layout. */
+.pagefind-search {
+  --pagefind-ui-font: inherit;
+  --pagefind-ui-background: Canvas;
+  --pagefind-ui-text: CanvasText;
+  --pagefind-ui-primary: CanvasText;
+  --pagefind-ui-border: color-mix(in srgb, CanvasText 20%, transparent);
+  --pagefind-ui-tag: color-mix(in srgb, CanvasText 10%, transparent);
+}
+
+.pagefind-search .pagefind-ui__search-input::placeholder {
+  opacity: 0.5;
 }

@@ -39,6 +39,32 @@
             </a>
           {{ /for }}
 
+          <!-- 站内搜索入口 -->
+          <a
+            href="/search/"
+            class="no-underline hover:underline opacity-60 hover:opacity-100"
+            aria-label="搜索"
+            title="搜索"
+            {{ if url.startsWith("/search") }}aria-current="page"{{ /if }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="block"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </a>
+
           <!-- RSS 订阅按钮 -->
           <a
             href="/rss.xml"
