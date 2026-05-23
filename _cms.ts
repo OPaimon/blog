@@ -12,7 +12,7 @@ const onDeploy = !!Deno.env.get("DENO_DEPLOYMENT_ID");
 
 const cms = lumeCMS({
   root: onDeploy ? "" : Deno.cwd(),
-  basePath: "/admin",
+  basePath: onDeploy ? "/" : "/admin",
   site: {
     name: "后台",
   },
